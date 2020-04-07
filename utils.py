@@ -11,7 +11,7 @@ from torch.autograd import Variable
 import torch.utils.data as Data
 
 import params
-from datasets import get_mnist, get_usps
+# from datasets import get_mnist, get_usps
 
 
 
