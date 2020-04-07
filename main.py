@@ -32,7 +32,7 @@ def get_target_data_loader():
     x = pd.read_excel('F:/毕业实验/a3/modal/a3_feature.xlsx', header=0).astype('float32')
     x = scale_related().norm(x)
     y = pd.read_excel(r'F:/毕业实验/a3/modal/a3_modal.xlsx', header=0).iloc[:, 1:4].astype('float32')
-    y = scale_related().norm(y)
+    # y = scale_related().norm(y)
     trn_x, val_x, trn_y, val_y = train_test_split(x, y, test_size=0.2)
     trn_x = torch.from_numpy(np.array(trn_x))
     trn_y = torch.from_numpy(np.array(trn_y))
@@ -71,7 +71,7 @@ def get_source_data_loader():
     x = torch.unsqueeze(x, 1)
 
     y = pd.read_excel('F:/毕业实验/a1/processed modal/a1_modal_15-23-2.xlsx', header=0).iloc[:, 1:].astype('float32')
-    y = scale_related().norm(y)
+    # y = scale_related().norm(y)
     y = torch.from_numpy(np.array(y))
 
     trn_x, val_x, trn_y, val_y = train_test_split(x, y, test_size=0.2)

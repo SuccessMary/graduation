@@ -73,13 +73,14 @@ class LeNetEncoder(nn.Module):
             nn.BatchNorm1d(100),
             nn.LeakyReLU()
             )
-        self.fc1 = nn.Linear(100 * 2,100)
+        # self.fc1 = nn.Linear(100 * 2,100)
+        self.fc1 = nn.Linear(50 * 4, 50)
 
     def forward(self, input):
         conv_out = self.encoder(input)
         # print(conv_out.shape)
         # 进全链接层之前，要先拉平(相当于tensorflow里的flatten)，第一维是batchsize
-        feat = self.fc1(conv_out.view(-1,100 * 2))
+        feat = self.fc1(conv_out.view(-1,50 * 4))
         return feat
 
 
@@ -104,7 +105,7 @@ class LeNetRegressor(nn.Module):
     """LeNet classifier model for ADDA."""
     def __init__(self):
         super(LeNetRegressor, self).__init__()
-        self.fc2 = nn.Linear(100,3)   #输出格式大小为3
+        self.fc2 = nn.Linear(50,3)   #输出格式大小为3
 
     def forward(self, feat):
         # out = F.dropout(F.relu(feat), training=self.training)
