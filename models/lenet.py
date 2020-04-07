@@ -43,7 +43,7 @@ from torch import nn
     #     conv_out = self.encoder(input)
     #     feat = self.fc1(conv_out.view(-1, 50 * 4 * 4))  #经过卷积层后，先把conv_out拉平，再输入全连接层
     #     return feat
-4
+
 #我的编码器
 class LeNetEncoder(nn.Module):
     def __init__(self):
