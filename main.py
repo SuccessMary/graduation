@@ -1,3 +1,4 @@
+import pandas as pd
 class scale_related():
     def __init__(self):
         self.stats = []
@@ -171,7 +172,20 @@ if not (tgt_encoder.restored and critic.restored and  # 如果目标域编码器
 print("=== Evaluating classifier for encoded target domain ===")
 print(">>> source encoder only <<<")
 eval_tgt(src_encoder, src_classifier, tgt_data_loader_eval)
-print(">>> domain adaption with train data of target area<<<")
-eval_tgt(tgt_encoder, src_classifier, tgt_data_loader)
+# print(">>> domain adaption with train data of target area<<<")
+# eval_tgt(tgt_encoder, src_classifier, tgt_data_loader)
 print(">>> domain adaption with valid data of target area<<<")
 eval_tgt(tgt_encoder, src_classifier, tgt_data_loader_eval)
+
+
+from utils import make_variable
+print(len(tgt_data_loader_eval.dataset))
+predict = []
+for (x,y) in tgt_data_loader_eval:
+    x = make_variable(x, volatile=True)  # 为True表示不需要反向传播
+    a = src_classifier(tgt_encoder(x)).cuda().data.cpu().numpy()
+#     print(a)
+    b = y.numpy()
+#     print(b)
+    predict.extend(np.concatenate([np.array(a),np.array(b)],axis=1))
+pd.DataFrame(predict).to_csv('aha2.csv',index=False,header=None)

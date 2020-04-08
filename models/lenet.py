@@ -71,10 +71,10 @@ class LeNetEncoder(nn.Module):
             #第三层卷积
             nn.Conv1d(50,100,3),
             nn.BatchNorm1d(100),
-            nn.LeakyReLU()
+            nn.Tanh()
             )
         # self.fc1 = nn.Linear(100 * 2,100)
-        self.fc1 = nn.Linear(50 * 4, 50)
+        self.fc1 = nn.Linear(100 * 2, 50)
 
     def forward(self, input):
         conv_out = self.encoder(input)

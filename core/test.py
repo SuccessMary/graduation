@@ -26,7 +26,7 @@ def eval_tgt(encoder, classifier, data_loader):
     # set loss function
     # criterion = nn.CrossEntropyLoss()
     #my
-    criterion = nn.MSELoss()
+    criterion = nn.MSELoss(reduce=True, size_average=True)
 
     # evaluate network
     for (images, labels) in data_loader:

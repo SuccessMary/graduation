@@ -28,7 +28,7 @@ def train_src(encoder, classifier, data_loader):
         alpha=0.9)
     # criterion = nn.CrossEntropyLoss()
     #my
-    criterion = nn.MSELoss()
+    criterion = nn.MSELoss(reduce=True, size_average=True)
 
     ####################
     # 2. train network #
@@ -68,7 +68,7 @@ def train_src(encoder, classifier, data_loader):
 
         # eval model on test set
         if ((epoch + 1) % params.eval_step_pre == 0):  #每20个epoch评价一次
-            print('[epoch:{}/{}]'.foramt(epoch,params.num_epochs_pre), eval_src(encoder, classifier, data_loader))
+            print('[epoch:{}/{}]'.format(epoch,params.num_epochs_pre), eval_src(encoder, classifier, data_loader))
 
         # save model parameters
         if ((epoch + 1) % params.save_step_pre == 0):  #每100个epoch保存一次
@@ -91,9 +91,9 @@ def eval_src(encoder, classifier, data_loader):
     # init loss and accuracy
     # loss = 0
     # acc = 0
-    loss1 = 0
-    loss2 = 0
-    loss3 = 0
+    loss_1 = 0
+    loss_2 = 0
+    loss_3 = 0
     acc1 = 0
     acc2 = 0
     acc3 = 0
@@ -114,9 +114,9 @@ def eval_src(encoder, classifier, data_loader):
         # print('预测值是：',preds)
         # loss += criterion(preds, labels).item()  #data[0]6
 
-        loss1 += criterion(preds[:,0], labels[:,0]).item()
-        loss2 += criterion(preds[:,1], labels[:,1]).item()
-        loss3 += criterion(preds[:,2], labels[:,2]).item()
+        loss_1 += criterion(preds[:,0], labels[:,0]).item()
+        loss_2 += criterion(preds[:,1], labels[:,1]).item()
+        loss_3 += criterion(preds[:,2], labels[:,2]).item()
 
         # pred_cls = preds.data.max(1)[1] #返回每一行最大值所在的索引(我的不需要，因为分类器（即我的回归器)直接输出一个结果)
         # acc += pred_cls.eq(labels.data).cpu().sum()
@@ -127,13 +127,13 @@ def eval_src(encoder, classifier, data_loader):
 
     # loss /= len(data_loader)
     # acc /= len(data_loader.dataset)
-    loss1 /= len(data_loader)
-    loss2 /= len(data_loader)
-    loss3 /= len(data_loader)
+    loss_1 /= len(data_loader)
+    loss_2 /= len(data_loader)
+    loss_3 /= len(data_loader)
     acc1 /= len(data_loader.dataset)
     acc2 /= len(data_loader.dataset)
     acc3 /= len(data_loader.dataset)
 
     # print("Avg Loss = {}, Avg Accuracy = {}".format(loss, acc))
-    print('Avg loss1: {}, Avg loss2: {}, Avg loss3: {}'.format(loss1,loss2,loss3))
+    print('Avg loss1: {}, Avg loss2: {}, Avg loss3: {}'.format(loss_1,loss_2,loss_3))
     print('Avg Acc1: {}, Avg Acc2: {}, Avg Acc3: {}'.format(acc1, acc2, acc3))
