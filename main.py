@@ -183,9 +183,9 @@ print(len(tgt_data_loader_eval.dataset))
 predict = []
 for (x,y) in tgt_data_loader_eval:
     x = make_variable(x, volatile=True)  # 为True表示不需要反向传播
-    a = src_classifier(tgt_encoder(x)).cuda().data.cpu().numpy()
+    a = src_classifier(tgt_encoder(x)).cuda().data.cpu().numpy()   #预测值
 #     print(a)
-    b = y.numpy()
+    b = y.numpy()  #真实值
 #     print(b)
     predict.extend(np.concatenate([np.array(a),np.array(b)],axis=1))
-pd.DataFrame(predict).to_csv('aha2.csv',index=False,header=None)
+pd.DataFrame(predict).to_csv('res_0419_3.csv',index=False,header=None)

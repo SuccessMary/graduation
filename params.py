@@ -1,10 +1,10 @@
 """Params for ADDA."""
 
 #params for the size of different data loader 暂时用不到
-n_src_trn_samples = 314
-n_src_eval_samples = 78
-n_tgt_trn_samples = 160
-n_src_eval_samples = 40
+# n_src_trn_samples = 314
+# n_src_eval_samples = 78
+# n_tgt_trn_samples = 160
+# n_src_eval_samples = 40
 
 # params for dataset and data loader
 data_root = "data"
@@ -27,7 +27,7 @@ tgt_encoder_restore = "snapshots/ADDA-target-encoder-final.pt"
 tgt_model_trained = True
 
 # params for setting up models
-model_root = "snapshots"
+model_root = "snapshots_0419_3"
 d_input_dims =  50  #40
 d_hidden_dims = 40
 d_output_dims = 2
@@ -35,7 +35,7 @@ d_model_restore = "snapshots/ADDA-critic-final.pt"
 
 # params for training network
 num_gpu = 1
-num_epochs_pre = 100      #####1
+num_epochs_pre = 500      #####1
 log_step_pre = 20
 eval_step_pre = 20
 save_step_pre = 100
@@ -45,7 +45,7 @@ save_step = 100
 manual_seed = 2020   #None
 
 # params for optimizing models
-d_learning_rate = 1e-3    #####4
-c_learning_rate = 1e-3   #####4
+d_learning_rate = 1e-4    #####4
+c_learning_rate = 1e-4   #####4
 beta1 = 0.9
 beta2 = 0.99
